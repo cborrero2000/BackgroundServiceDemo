@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private String result;
     private TextView txvResult;
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +32,24 @@ public class MainActivity extends AppCompatActivity {
     public void startBackgroundService(View view) {
         Intent intent = new Intent(this, MyBackgroundService.class);
         startService(intent);
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Log.i(TAG, "startBackgroundService");
+        ft.replace(R.id.activityFragment, new BlankFragment());
+        ft.commit();
     }
 
     public void stopBackgroundService(View view) {
         Intent intent = new Intent(this, MyBackgroundService.class);
         stopService(intent);
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Log.i(TAG, "stopBackgroundService");
+        ft.replace(R.id.activityFragment, new BlankFragment2());
+        ft.commit();
     }
-
-
 
     public void startIntentService(View view) {
         Intent intent = new Intent(this, MyIntentService.class);

@@ -7,28 +7,11 @@
     android:layout_height="match_parent"
     android:padding="40dp">
 
-    <Button
-        android:id="@+id/btnStartStartedService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:onClick="startBackgroundService"
-        android:text="Start Background Service"/>
-
-    <Button
-        android:id="@+id/btnStopStartedService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnStartStartedService"
-        android:onClick="stopBackgroundService"
-        android:text="Stop Background Service"/>
-
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="62dp"
         android:checked="true"
         android:showText="true"
         android:switchTextAppearance="@android:style/TextAppearance.StatusBar.EventContent.Title"
@@ -37,7 +20,32 @@
         android:textColorLink="@color/colorAccent"
         android:textOff="Off"
         android:textOn="On"
-        tools:checked="true" />
+        tools:checked="true"
+        />
+
+    <Button
+        android:id="@+id/btnStartStartedService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startBackgroundService"
+        android:text="Start Background Service"
+        android:layout_below="@id/switch1"/>
+
+    <Button
+        android:id="@+id/btnStopStartedService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnStartStartedService"
+        android:onClick="stopBackgroundService"
+        android:text="Stop Background Service"/>
+
+    <fragment
+        android:id="@+id/activityFragment"
+        android:name="com.packt.backgroundservicedemo.BlankFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/btnStopStartedService"/>
 
     <Button
         android:id="@+id/button"
@@ -49,16 +57,6 @@
         android:text="START INTENT SERVICE"
         android:onClick="startIntentService"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-10dp"
-        android:layout_marginBottom="84dp"
-        android:text="Result" />
-
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -68,5 +66,15 @@
         android:layout_marginBottom="209dp"
         android:onClick="startJobIntentService"
         android:text="START JOBINTENTSERVICE" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-10dp"
+        android:layout_marginBottom="84dp"
+        android:text="Result" />
 
 </RelativeLayout>
