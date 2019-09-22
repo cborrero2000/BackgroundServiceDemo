@@ -7,6 +7,7 @@ import android.support.v4.app.JobIntentService;
 import android.util.Log;
 import android.widget.Toast;
 
+
 public class MyJobIntentService extends JobIntentService {
 
     private static final String TAG = MyJobIntentService.class.getSimpleName();

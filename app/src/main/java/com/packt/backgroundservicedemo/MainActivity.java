@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String result;
     private TextView txvResult;
+    private String definition;
+    private TextView textDefinition;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txvResult = (TextView) findViewById(R.id.textView);
+        textDefinition = (TextView) findViewById(R.id.textDefinition);
+        textDefinition.setMovementMethod(new android.text.method.ScrollingMovementMethod());
     }
 
     public void startBackgroundService(View view) {
@@ -57,14 +61,15 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
 
         IntentFilter intentFilter = new IntentFilter("my.local.broadcast");
         LocalBroadcastManager.getInstance(this).registerReceiver(MyLocalBroadcastReceiver, intentFilter);
+
+        IntentFilter intentFilter2 = new IntentFilter("my.own.broadcast");
+        LocalBroadcastManager.getInstance(this).registerReceiver(MyLocalContentProviderBroadcastReceiver, intentFilter2);
     }
 
     private BroadcastReceiver MyLocalBroadcastReceiver = new BroadcastReceiver() {
@@ -76,17 +81,31 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private BroadcastReceiver MyLocalContentProviderBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            definition = intent.getStringExtra("androidTerms");
+            textDefinition.setText(definition);
+        }
+    };
+
     @Override
     protected void onPause() {
         super.onPause();
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(MyLocalBroadcastReceiver);
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(MyLocalContentProviderBroadcastReceiver);
     }
 
     public void startJobIntentService(View view) {
         Intent i = new Intent(this, MyJobIntentService.class);
         i.putExtra("sleepTime", 12);
         MyJobIntentService.enqueueWork(this, i);
+    }
 
+    public void showDefinition(View view) {
+        Intent intent = new Intent(this, MyJobIntentService2.class);
+        MyJobIntentService2.enqueueWork(this, intent);
     }
 }

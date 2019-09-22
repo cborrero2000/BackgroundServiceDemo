@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.example.udacity.droidtermsexample.TERMS_READ"/>
 
     <application
         android:allowBackup="true"
@@ -24,6 +25,7 @@
         <service android:name=".MyIntentService"/>
 
         <service android:name=".MyJobIntentService" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false"/>
+        <service android:name=".MyJobIntentService2" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false"/>
 
         <receiver android:name=".MyBroadcastReceiver">
             <intent-filter>
