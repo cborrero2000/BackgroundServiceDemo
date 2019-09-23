@@ -16,12 +16,10 @@ import java.util.zip.Inflater;
 
 public class MyJobIntentService2 extends JobIntentService {
 
-    static Context contextMain = null;
     private final static String TAG = MyJobIntentService2.class.getSimpleName();
 
     public static void enqueueWork(Context context, Intent intent) {
         enqueueWork(context, MyJobIntentService2.class, 18, intent);
-        contextMain = context;
     }
 
     @Override
