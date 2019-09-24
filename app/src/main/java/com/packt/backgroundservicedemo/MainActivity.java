@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
@@ -31,6 +32,25 @@ public class MainActivity extends AppCompatActivity {
         txvResult = (TextView) findViewById(R.id.textView);
         textDefinition = (TextView) findViewById(R.id.textDefinition);
         textDefinition.setMovementMethod(new android.text.method.ScrollingMovementMethod());
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("terms", definition);
+        outState.putString("result", result);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        definition = savedInstanceState.getString("terms");
+        textDefinition.setText(definition);
+
+        result = savedInstanceState.getString("result");
+        txvResult.setText(result);
     }
 
     public void startBackgroundService(View view) {
